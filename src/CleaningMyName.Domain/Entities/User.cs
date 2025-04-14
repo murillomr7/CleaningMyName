@@ -63,6 +63,16 @@ public class User : BaseEntity
         }
     }
     
+    // Add a method to directly add a UserRole
+    public void AddUserRole(UserRole userRole)
+    {
+        if (!_userRoles.Any(ur => ur.RoleId == userRole.RoleId))
+        {
+            _userRoles.Add(userRole);
+            ModifiedOnUtc = DateTime.UtcNow;
+        }
+    }
+    
     public void RemoveRole(Role role)
     {
         var userRole = _userRoles.FirstOrDefault(ur => ur.RoleId == role.Id);

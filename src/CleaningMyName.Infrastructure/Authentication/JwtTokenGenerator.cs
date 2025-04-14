@@ -8,6 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace CleaningMyName.Infrastructure.Authentication;
 
+// This is an enhanced version of our JwtTokenGenerator
 public class JwtTokenGenerator
 {
     private readonly JwtSettings _jwtSettings;
@@ -19,10 +20,6 @@ public class JwtTokenGenerator
 
     public string GenerateToken(User user)
     {
-        var signingCredentials = new SigningCredentials(
-            new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.SecretKey)),
-            SecurityAlgorithms.HmacSha256);
-
         var claims = new List<Claim>
         {
             new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
@@ -37,6 +34,32 @@ public class JwtTokenGenerator
         {
             claims.Add(new Claim(ClaimTypes.Role, userRole.Role.Name));
         }
+
+        return GenerateTokenFromClaims(claims);
+    }
+
+    public string GenerateToken(User user, List<Claim> additionalClaims)
+    {
+        var claims = new List<Claim>
+        {
+            new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+            new Claim(JwtRegisteredClaimNames.GivenName, user.FirstName),
+            new Claim(JwtRegisteredClaimNames.FamilyName, user.LastName),
+            new Claim(JwtRegisteredClaimNames.Email, user.Email.Value),
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+        };
+
+        // Add additional claims
+        claims.AddRange(additionalClaims);
+
+        return GenerateTokenFromClaims(claims);
+    }
+
+    private string GenerateTokenFromClaims(List<Claim> claims)
+    {
+        var signingCredentials = new SigningCredentials(
+            new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.SecretKey)),
+            SecurityAlgorithms.HmacSha256);
 
         var securityToken = new JwtSecurityToken(
             issuer: _jwtSettings.Issuer,
@@ -71,8 +94,8 @@ public class JwtTokenGenerator
 
         var tokenHandler = new JwtSecurityTokenHandler();
         var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out var securityToken);
-        
-        if (securityToken is not JwtSecurityToken jwtSecurityToken || 
+
+        if (securityToken is not JwtSecurityToken jwtSecurityToken ||
             !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
         {
             throw new SecurityTokenException("Invalid token");
