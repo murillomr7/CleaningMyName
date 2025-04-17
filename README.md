@@ -1,6 +1,13 @@
 # CleaningMyName API
+=====================
 
-A RESTful API built with .NET 7 following Clean Architecture principles and best practices.
+The CleaningMyName Project is a financial recovery application written in .NET 7
+
+The application provides a simple implementation for people that's need to pay the bills. 
+Also, this project implements the most common used technologies looking for the best way to develop great applications with .NET
+
+
+A RESTful API built with .NET 7 following best practices.
 
 ## Features
 
@@ -29,3 +36,19 @@ A RESTful API built with .NET 7 following Clean Architecture principles and best
 ```bash
 git clone https://github.com/yourusername/CleaningMyName.git
 cd CleaningMyName
+
+
+CleaningMyName/
+├── src/
+│   ├── CleaningMyName.Domain/          # Core entities and business rules 
+│   ├── CleaningMyName.Application/     # Business logic and use cases 
+│   ├── CleaningMyName.Infrastructure/  # External concerns like DB, identity 
+│   └── CleaningMyName.Api/             # API controllers and presentation 
+├── Dockerfile                           # Docker build instructions 
+├── docker-compose.yml                   # Docker compose configuration
+├── .dockerignore                        # Files to ignore in Docker context
+│
+├── test/
+│   ├── CleaningMyName.UnitTests/       # Unit tests 
+│   └── CleaningMyName.IntegrationTests/ # Integration tests 
+└── CleaningMyName.sln                   # Solution file
