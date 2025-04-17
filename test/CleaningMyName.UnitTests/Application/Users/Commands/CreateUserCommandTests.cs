@@ -1,13 +1,11 @@
-using CleaningMyName.Application.Common.Interfaces;
-using CleaningMyName.Application.Common.Models;
-using CleaningMyName.Application.Users.Commands.CreateUser;
-using CleaningMyName.Domain.Entities;
-using CleaningMyName.Domain.Interfaces.Repositories;
-using CleaningMyName.Domain.ValueObjects;
-using CleaningMyName.UnitTests.Common;
-using FluentAssertions;
 using Moq;
-using Xunit;
+using FluentAssertions;
+using CleaningMyName.Domain.Entities;
+using CleaningMyName.UnitTests.Common;
+using CleaningMyName.Domain.ValueObjects;
+using CleaningMyName.Application.Common.Interfaces;
+using CleaningMyName.Domain.Interfaces.Repositories;
+using CleaningMyName.Application.Users.Commands.CreateUser;
 
 namespace CleaningMyName.UnitTests.Application.Users.Commands;
 

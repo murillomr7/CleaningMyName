@@ -41,4 +41,10 @@ public class UserRepository : RepositoryBase<User>, IUserRepository
         return await _dbContext.Users
             .AnyAsync(u => u.Email.Value == email.Value, cancellationToken);
     }
+
+    public override async Task<bool> ExistsAsync(Guid id, CancellationToken cancellationToken = default)
+    {
+        return await _dbContext.Users
+            .AnyAsync(u => u.Id == id, cancellationToken);
+    }
 }

@@ -1,4 +1,3 @@
-using System.Security.Claims;
 using CleaningMyName.Application.Common.Interfaces;
 using CleaningMyName.Application.Common.Models;
 using CleaningMyName.Domain.Interfaces.Repositories;
@@ -6,10 +5,10 @@ using CleaningMyName.Domain.ValueObjects;
 using CleaningMyName.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using System.Security.Claims;
 
 namespace CleaningMyName.Infrastructure.Authentication;
 
-// This is an enhanced version of our AuthenticationService
 public class AuthenticationService : IAuthenticationService
 {
     private readonly IUnitOfWork _unitOfWork;
@@ -23,7 +22,7 @@ public class AuthenticationService : IAuthenticationService
         IPasswordService passwordService,
         JwtTokenGenerator jwtTokenGenerator,
         IOptions<JwtSettings> jwtSettings,
-        ApplicationDbContext dbContext)
+        Persistence.ApplicationDbContext dbContext)
     {
         _unitOfWork = unitOfWork;
         _passwordService = passwordService;
@@ -54,39 +53,8 @@ public class AuthenticationService : IAuthenticationService
                 return new AuthenticationResult { Success = false, Message = "Invalid password." };
             }
 
-            // Get user roles
-            var roles = user.UserRoles.Select(ur => ur.Role.Name).ToList();
-
-            // Create claims
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Email, user.Email.Value),
-                new Claim(ClaimTypes.Name, user.FullName),
-                new Claim(ClaimTypes.GivenName, user.FirstName),
-                new Claim(ClaimTypes.Surname, user.LastName)
-            };
-
-            // Add role claims
-            foreach (var role in roles)
-            {
-                claims.Add(new Claim(ClaimTypes.Role, role));
-
-                // Add role-specific permissions as claims
-                if (role == "Admin")
-                {
-                    claims.Add(new Claim("Permission", "users.manage"));
-                    claims.Add(new Claim("Permission", "users.read"));
-                    claims.Add(new Claim("Permission", "full.access"));
-                }
-                else if (role == "User")
-                {
-                    claims.Add(new Claim("Permission", "users.read"));
-                }
-            }
-
-            // Generate access token with claims
-            var token = _jwtTokenGenerator.GenerateToken(user, claims);
+            // Generate access token
+            var token = _jwtTokenGenerator.GenerateToken(user);
 
             // Generate refresh token
             var refreshToken = _jwtTokenGenerator.GenerateRefreshToken();
@@ -111,7 +79,7 @@ public class AuthenticationService : IAuthenticationService
                 UserName = user.FullName,
                 Token = token,
                 RefreshToken = refreshToken,
-                Roles = roles
+                Roles = user.UserRoles.Select(ur => ur.Role.Name).ToList()
             };
         }
         catch (Exception ex)
@@ -151,39 +119,8 @@ public class AuthenticationService : IAuthenticationService
             // Mark the current refresh token as used
             refreshTokenEntity.MarkAsUsed();
 
-            // Get user roles
-            var roles = user.UserRoles.Select(ur => ur.Role.Name).ToList();
-
-            // Create claims
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Email, user.Email.Value),
-                new Claim(ClaimTypes.Name, user.FullName),
-                new Claim(ClaimTypes.GivenName, user.FirstName),
-                new Claim(ClaimTypes.Surname, user.LastName)
-            };
-
-            // Add role claims
-            foreach (var role in roles)
-            {
-                claims.Add(new Claim(ClaimTypes.Role, role));
-
-                // Add role-specific permissions as claims
-                if (role == "Admin")
-                {
-                    claims.Add(new Claim("Permission", "users.manage"));
-                    claims.Add(new Claim("Permission", "users.read"));
-                    claims.Add(new Claim("Permission", "full.access"));
-                }
-                else if (role == "User")
-                {
-                    claims.Add(new Claim("Permission", "users.read"));
-                }
-            }
-
             // Generate new tokens
-            var newToken = _jwtTokenGenerator.GenerateToken(user, claims);
+            var newToken = _jwtTokenGenerator.GenerateToken(user);
             var newRefreshToken = _jwtTokenGenerator.GenerateRefreshToken();
             var newRefreshTokenEntity = new RefreshToken(
                 user.Id,
@@ -202,7 +139,7 @@ public class AuthenticationService : IAuthenticationService
                 UserName = user.FullName,
                 Token = newToken,
                 RefreshToken = newRefreshToken,
-                Roles = roles
+                Roles = user.UserRoles.Select(ur => ur.Role.Name).ToList()
             };
         }
         catch (Exception ex)

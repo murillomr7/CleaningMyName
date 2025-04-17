@@ -1,6 +1,4 @@
 using AutoFixture;
-using AutoFixture.Xunit2;
-using System;
 
 namespace CleaningMyName.UnitTests.Common;
 
@@ -27,17 +25,5 @@ public class AutoMoqCustomization : ICustomization
         fixture.Behaviors.OfType<ThrowingRecursionBehavior>().ToList()
             .ForEach(b => fixture.Behaviors.Remove(b));
         fixture.Behaviors.Add(new OmitOnRecursionBehavior());
-    }
-}
-
-/// <summary>
-/// Attribute to provide auto-generated data for test methods
-/// </summary>
-[System.AttributeUsage(AttributeTargets.Method)]
-public class CustomAutoDataAttribute : AutoDataAttribute
-{
-    public CustomAutoDataAttribute() 
-        : base(() => new Fixture().Customize(new AutoMoqCustomization()))
-    {
     }
 }

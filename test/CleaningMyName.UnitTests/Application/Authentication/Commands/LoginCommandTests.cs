@@ -1,10 +1,8 @@
 using CleaningMyName.Application.Authentication.Commands.Login;
 using CleaningMyName.Application.Common.Interfaces;
-using CleaningMyName.Application.Common.Models;
 using CleaningMyName.UnitTests.Common;
 using FluentAssertions;
 using Moq;
-using Xunit;
 
 namespace CleaningMyName.UnitTests.Application.Authentication.Commands;
 

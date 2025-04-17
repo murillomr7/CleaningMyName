@@ -27,7 +27,7 @@ public static class HealthCheckExtensions
 
         // Disk storage health check
         healthChecksBuilder.AddDiskStorageHealthCheck(
-            setup: options => options.AddDrive(Path.GetPathRoot(Directory.GetCurrentDirectory())!, 1024), // Minimum 1GB free space
+            setup: options => options.AddDrive(Path.GetPathRoot(Directory.GetCurrentDirectory())!, 1024),
             name: "disk-space",
             failureStatus: HealthStatus.Degraded,
             tags: new[] { "storage" });
@@ -41,14 +41,14 @@ public static class HealthCheckExtensions
         // Add health check UI
         services.AddHealthChecksUI(options =>
         {
-            options.SetEvaluationTimeInSeconds(60); // Evaluate every 60 seconds
-            options.MaximumHistoryEntriesPerEndpoint(50); // Store 50 history entries
-            options.SetApiMaxActiveRequests(1); // Set 1 active request at a time
+            options.SetEvaluationTimeInSeconds(60); 
+            options.MaximumHistoryEntriesPerEndpoint(50); 
+            options.SetApiMaxActiveRequests(1);
             
             // Add health check endpoint to be monitored
             options.AddHealthCheckEndpoint("API", "/health");
         })
-        .AddInMemoryStorage(); // Use in-memory storage for health check history
+        .AddInMemoryStorage();
 
         return services;
     }
@@ -81,7 +81,6 @@ public static class HealthCheckExtensions
             }
         });
 
-        // Live health check endpoint - checks if the application is running
         app.UseHealthChecks("/health/live", new HealthCheckOptions
         {
             Predicate = check => check.Tags.Contains("service"),
@@ -94,7 +93,6 @@ public static class HealthCheckExtensions
             }
         });
 
-        // Add health check UI dashboard
         app.UseHealthChecksUI(options =>
         {
             options.UIPath = "/health-ui";

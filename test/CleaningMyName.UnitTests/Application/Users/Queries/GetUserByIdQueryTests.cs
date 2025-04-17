@@ -1,15 +1,13 @@
+using Moq;
 using AutoMapper;
+using FluentAssertions;
+using CleaningMyName.Domain.Entities;
+using CleaningMyName.UnitTests.Common;
+using CleaningMyName.Domain.ValueObjects;
 using CleaningMyName.Application.Common.Exceptions;
 using CleaningMyName.Application.Common.Mappings;
-using CleaningMyName.Application.Users;
-using CleaningMyName.Application.Users.Queries.GetUserById;
-using CleaningMyName.Domain.Entities;
 using CleaningMyName.Domain.Interfaces.Repositories;
-using CleaningMyName.Domain.ValueObjects;
-using CleaningMyName.UnitTests.Common;
-using FluentAssertions;
-using Moq;
-using Xunit;
+using CleaningMyName.Application.Users.Queries.GetUserById;
 
 namespace CleaningMyName.UnitTests.Application.Users.Queries;
 

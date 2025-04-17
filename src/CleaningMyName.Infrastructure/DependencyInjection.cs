@@ -23,12 +23,16 @@ public static class DependencyInjection
         // Register repositories
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IRoleRepository, RoleRepository>();
+        services.AddScoped<IDebtRepository, DebtRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         // Register services
         services.AddScoped<IDateTimeService, DateTimeService>();
         services.AddScoped<IPasswordService, PasswordService>();
         services.AddScoped<IAuthenticationService, AuthenticationService>();
+
+        // Add HttpContextAccessor
+        services.AddHttpContextAccessor();
 
         // Configure JWT
         var jwtSettings = new JwtSettings();

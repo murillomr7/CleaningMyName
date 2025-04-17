@@ -2,7 +2,6 @@ using CleaningMyName.Api.Models.Requests;
 using CleaningMyName.Api.Models.Responses;
 using CleaningMyName.Application.Authentication.Commands.Login;
 using CleaningMyName.Application.Authentication.Commands.RefreshToken;
-using CleaningMyName.Application.Common.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CleaningMyName.Api.Controllers.v1;

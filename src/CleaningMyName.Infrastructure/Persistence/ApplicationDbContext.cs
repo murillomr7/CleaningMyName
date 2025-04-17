@@ -1,10 +1,11 @@
 using CleaningMyName.Domain.Common;
 using CleaningMyName.Domain.Entities;
+using CleaningMyName.Infrastructure.Authentication;
 using Microsoft.EntityFrameworkCore;
 
 namespace CleaningMyName.Infrastructure.Persistence;
 
-public partial class ApplicationDbContext : DbContext
+public class ApplicationDbContext : DbContext
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
@@ -14,6 +15,8 @@ public partial class ApplicationDbContext : DbContext
     public DbSet<User> Users => Set<User>();
     public DbSet<Role> Roles => Set<Role>();
     public DbSet<UserRole> UserRoles => Set<UserRole>();
+    public DbSet<Debt> Debts => Set<Debt>();
+    public DbSet<RefreshToken> RefreshTokens => Set<RefreshToken>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

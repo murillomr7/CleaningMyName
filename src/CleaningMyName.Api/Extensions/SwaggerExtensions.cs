@@ -10,12 +10,11 @@ public static class SwaggerExtensions
     {
         services.AddSwaggerGen(options =>
         {
-            // Basic API information
             options.SwaggerDoc("v1", new OpenApiInfo
             {
                 Title = "CleaningMyName API",
                 Version = "v1",
-                Description = "A RESTful API built with .NET 7 and Clean Architecture principles",
+                Description = "A RESTful API that provide fast way to pay your bills",
                 Contact = new OpenApiContact
                 {
                     Name = "CleaningMyName Team",
@@ -32,9 +31,7 @@ public static class SwaggerExtensions
             // Add JWT authentication support to Swagger
             options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
             {
-                Description = "JWT Authorization header using the Bearer scheme.\r\n\r\n" +
-                              "Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\n" +
-                              "Example: 'Bearer 12345abcdef'",
+                Description = "JWT Authorization",
                 Name = "Authorization",
                 In = ParameterLocation.Header,
                 Type = SecuritySchemeType.ApiKey,
@@ -56,7 +53,6 @@ public static class SwaggerExtensions
                 }
             });
 
-            // Configure XML comments
             var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
             var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
             if (File.Exists(xmlPath))
@@ -64,14 +60,10 @@ public static class SwaggerExtensions
                 options.IncludeXmlComments(xmlPath);
             }
 
-            // Add examples for requests and responses
             options.ExampleFilters();
-
-            // Order the actions
             options.OrderActionsBy(apiDesc => $"{apiDesc.ActionDescriptor.RouteValues["controller"]}_{apiDesc.HttpMethod}");
         });
 
-        // Register the Swagger examples from this assembly
         services.AddSwaggerExamplesFromAssemblyOf<Program>();
 
         return services;

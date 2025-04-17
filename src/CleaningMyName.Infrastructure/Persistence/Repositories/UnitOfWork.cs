@@ -11,15 +11,18 @@ public class UnitOfWork : IUnitOfWork, IDisposable
 
     public IUserRepository UserRepository { get; }
     public IRoleRepository RoleRepository { get; }
+    public IDebtRepository DebtRepository { get; }
 
     public UnitOfWork(
         ApplicationDbContext dbContext,
         IUserRepository userRepository,
-        IRoleRepository roleRepository)
+        IRoleRepository roleRepository,
+        IDebtRepository debtRepository)
     {
         _dbContext = dbContext;
         UserRepository = userRepository;
         RoleRepository = roleRepository;
+        DebtRepository = debtRepository;
     }
 
     public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

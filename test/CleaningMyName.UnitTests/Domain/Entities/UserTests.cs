@@ -2,7 +2,6 @@ using CleaningMyName.Domain.Entities;
 using CleaningMyName.Domain.ValueObjects;
 using CleaningMyName.UnitTests.Common;
 using FluentAssertions;
-using Xunit;
 
 namespace CleaningMyName.UnitTests.Domain.Entities;
 

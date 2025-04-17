@@ -14,6 +14,15 @@ public class RefreshTokenConfiguration : IEntityTypeConfiguration<RefreshToken>
             .HasMaxLength(500)
             .IsRequired();
 
+        builder.Property(rt => rt.ExpiryDate)
+            .IsRequired();
+
+        builder.Property(rt => rt.IsUsed)
+            .HasDefaultValue(false);
+
+        builder.Property(rt => rt.IsRevoked)
+            .HasDefaultValue(false);
+
         builder.HasOne(rt => rt.User)
             .WithMany()
             .HasForeignKey(rt => rt.UserId)

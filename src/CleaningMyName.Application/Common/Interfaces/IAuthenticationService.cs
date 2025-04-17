@@ -1,5 +1,3 @@
-using CleaningMyName.Application.Common.Models;
-
 namespace CleaningMyName.Application.Common.Interfaces;
 
 public interface IAuthenticationService

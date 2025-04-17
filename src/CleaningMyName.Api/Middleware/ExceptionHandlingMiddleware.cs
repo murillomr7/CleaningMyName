@@ -1,6 +1,5 @@
 using System.Net;
 using System.Text.Json;
-using CleaningMyName.Api.Models.Responses;
 using CleaningMyName.Application.Common.Exceptions;
 
 namespace CleaningMyName.Api.Middleware;
