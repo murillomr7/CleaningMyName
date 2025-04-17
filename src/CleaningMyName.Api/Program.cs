@@ -17,7 +17,10 @@ builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApiServices();
 
 // Add health checks
-builder.Services.AddHealthChecks(builder.Configuration);
+//builder.Services.AddHealthChecks(builder.Configuration);
+// Add custom health checks
+builder.Services.AddHealthChecks(builder.Configuration)
+                .AddCustomHealthChecks(builder.Configuration);
 
 // Add JWT authentication
 builder.Services.AddJwtAuthentication(builder.Configuration);

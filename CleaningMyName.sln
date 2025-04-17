@@ -4,6 +4,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{827E0CD3-B72D-47B6-A68D-7590B98EB39B}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+		Dockerfile = Dockerfile
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleaningMyName.Domain", "src\CleaningMyName.Domain\CleaningMyName.Domain.csproj", "{77F77AA5-6719-4F09-AB92-EF6EEE185071}"
 EndProject
@@ -112,5 +116,8 @@ Global
 		{03665114-6AAC-4E06-8C4C-DE3AA39B0E93} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{7E31E496-3680-44A7-AB92-5CE70E1D99C9} = {0C88DD14-F956-CE84-757C-A364CCF449FC}
 		{DE103138-085A-498E-BC55-3095075B2695} = {0C88DD14-F956-CE84-757C-A364CCF449FC}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {592C0863-F567-4BC3-BCC2-D9154E82C1F0}
 	EndGlobalSection
 EndGlobal

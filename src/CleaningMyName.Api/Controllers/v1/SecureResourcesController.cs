@@ -54,14 +54,4 @@ public class SecureResourcesController : ApiControllerBase
     {
         return Ok(ApiResponse<string>.SuccessResponse("This is a resource for managing users."));
     }
-
-    /// <summary>
-    /// An endpoint that requires the user to be at least 18 years old
-    /// </summary>
-    [HttpGet("adults-only")]
-    [Authorize(Policy = "MinimumAge18")]
-    public IActionResult GetAdultsOnlyResource()
-    {
-        return Ok(ApiResponse<string>.SuccessResponse("This is a resource for adults."));
-    }
 }

@@ -227,15 +227,15 @@
           "dependencies": {
             "AutoFixture": {
               "target": "Package",
-              "version": "[4.18.1, )"
+              "version": "[4.18.0, )"
             },
             "AutoFixture.Xunit2": {
               "target": "Package",
-              "version": "[4.18.1, )"
+              "version": "[4.18.0, )"
             },
             "FluentAssertions": {
               "target": "Package",
-              "version": "[8.2.0, )"
+              "version": "[6.10.0, )"
             },
             "Microsoft.AspNetCore.Http.Abstractions": {
               "target": "Package",
@@ -243,25 +243,27 @@
             },
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
-              "version": "[17.13.0, )"
+              "version": "[17.5.0, )"
             },
             "Moq": {
               "target": "Package",
-              "version": "[4.20.72, )"
+              "version": "[4.18.4, )"
             },
             "coverlet.collector": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
               "version": "[3.2.0, )"
             },
             "xunit": {
               "target": "Package",
-              "version": "[2.9.3, )"
+              "version": "[2.4.2, )"
             },
             "xunit.runner.visualstudio": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[3.0.2, )"
+              "version": "[2.4.5, )"
             }
           },
           "imports": [
