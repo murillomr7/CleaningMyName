@@ -12,11 +12,12 @@ public class ApplicationDbContext : DbContext
     {
     }
 
-    public DbSet<User> Users => Set<User>();
-    public DbSet<Role> Roles => Set<Role>();
-    public DbSet<UserRole> UserRoles => Set<UserRole>();
-    public DbSet<Debt> Debts => Set<Debt>();
-    public DbSet<RefreshToken> RefreshTokens => Set<RefreshToken>();
+    // Make properties virtual for mocking
+    public virtual DbSet<User> Users { get; set; } = null!;
+    public virtual DbSet<Role> Roles { get; set; } = null!;
+    public virtual DbSet<UserRole> UserRoles { get; set; } = null!;
+    public virtual DbSet<Debt> Debts { get; set; } = null!;
+    public virtual DbSet<RefreshToken> RefreshTokens { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
