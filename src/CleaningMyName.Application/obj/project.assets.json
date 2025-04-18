@@ -673,11 +673,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\repos\\CleaningMyName\\src\\CleaningMyName.Application\\CleaningMyName.Application.csproj",
+      "projectUniqueName": "F:\\repos\\CleaningMyName\\src\\CleaningMyName.Application\\CleaningMyName.Application.csproj",
       "projectName": "CleaningMyName.Application",
-      "projectPath": "C:\\repos\\CleaningMyName\\src\\CleaningMyName.Application\\CleaningMyName.Application.csproj",
+      "projectPath": "F:\\repos\\CleaningMyName\\src\\CleaningMyName.Application\\CleaningMyName.Application.csproj",
       "packagesPath": "C:\\Users\\muril\\.nuget\\packages\\",
-      "outputPath": "C:\\repos\\CleaningMyName\\src\\CleaningMyName.Application\\obj\\",
+      "outputPath": "F:\\repos\\CleaningMyName\\src\\CleaningMyName.Application\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -698,8 +698,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\repos\\CleaningMyName\\src\\CleaningMyName.Domain\\CleaningMyName.Domain.csproj": {
-              "projectPath": "C:\\repos\\CleaningMyName\\src\\CleaningMyName.Domain\\CleaningMyName.Domain.csproj"
+            "F:\\repos\\CleaningMyName\\src\\CleaningMyName.Domain\\CleaningMyName.Domain.csproj": {
+              "projectPath": "F:\\repos\\CleaningMyName\\src\\CleaningMyName.Domain\\CleaningMyName.Domain.csproj"
             }
           }
         }

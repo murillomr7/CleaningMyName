@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\repos\\CleaningMyName\\src\\CleaningMyName.Api\\CleaningMyName.Api.csproj": {}
+    "F:\\repos\\CleaningMyName\\src\\CleaningMyName.Api\\CleaningMyName.Api.csproj": {}
   },
   "projects": {
-    "C:\\repos\\CleaningMyName\\src\\CleaningMyName.Api\\CleaningMyName.Api.csproj": {
+    "F:\\repos\\CleaningMyName\\src\\CleaningMyName.Api\\CleaningMyName.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\repos\\CleaningMyName\\src\\CleaningMyName.Api\\CleaningMyName.Api.csproj",
+        "projectUniqueName": "F:\\repos\\CleaningMyName\\src\\CleaningMyName.Api\\CleaningMyName.Api.csproj",
         "projectName": "CleaningMyName.Api",
-        "projectPath": "C:\\repos\\CleaningMyName\\src\\CleaningMyName.Api\\CleaningMyName.Api.csproj",
+        "projectPath": "F:\\repos\\CleaningMyName\\src\\CleaningMyName.Api\\CleaningMyName.Api.csproj",
         "packagesPath": "C:\\Users\\muril\\.nuget\\packages\\",
-        "outputPath": "C:\\repos\\CleaningMyName\\src\\CleaningMyName.Api\\obj\\",
+        "outputPath": "F:\\repos\\CleaningMyName\\src\\CleaningMyName.Api\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -32,14 +32,14 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\repos\\CleaningMyName\\src\\CleaningMyName.Application\\CleaningMyName.Application.csproj": {
-                "projectPath": "C:\\repos\\CleaningMyName\\src\\CleaningMyName.Application\\CleaningMyName.Application.csproj"
+              "F:\\repos\\CleaningMyName\\src\\CleaningMyName.Application\\CleaningMyName.Application.csproj": {
+                "projectPath": "F:\\repos\\CleaningMyName\\src\\CleaningMyName.Application\\CleaningMyName.Application.csproj"
               },
-              "C:\\repos\\CleaningMyName\\src\\CleaningMyName.Domain\\CleaningMyName.Domain.csproj": {
-                "projectPath": "C:\\repos\\CleaningMyName\\src\\CleaningMyName.Domain\\CleaningMyName.Domain.csproj"
+              "F:\\repos\\CleaningMyName\\src\\CleaningMyName.Domain\\CleaningMyName.Domain.csproj": {
+                "projectPath": "F:\\repos\\CleaningMyName\\src\\CleaningMyName.Domain\\CleaningMyName.Domain.csproj"
               },
-              "C:\\repos\\CleaningMyName\\src\\CleaningMyName.Infrastructure\\CleaningMyName.Infrastructure.csproj": {
-                "projectPath": "C:\\repos\\CleaningMyName\\src\\CleaningMyName.Infrastructure\\CleaningMyName.Infrastructure.csproj"
+              "F:\\repos\\CleaningMyName\\src\\CleaningMyName.Infrastructure\\CleaningMyName.Infrastructure.csproj": {
+                "projectPath": "F:\\repos\\CleaningMyName\\src\\CleaningMyName.Infrastructure\\CleaningMyName.Infrastructure.csproj"
               }
             }
           }
@@ -62,7 +62,7 @@
           "dependencies": {
             "AspNetCore.HealthChecks.SqlServer": {
               "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[6.0.2, )"
             },
             "AspNetCore.HealthChecks.System": {
               "target": "Package",
@@ -74,7 +74,7 @@
             },
             "AspNetCore.HealthChecks.UI.Client": {
               "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[7.1.0, )"
             },
             "AspNetCore.HealthChecks.UI.InMemory.Storage": {
               "target": "Package",
@@ -88,21 +88,53 @@
               "target": "Package",
               "version": "[5.0.0, )"
             },
+            "Microsoft.Extensions.Configuration.Binder": {
+              "target": "Package",
+              "version": "[7.0.3, )"
+            },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
             "Microsoft.Extensions.Diagnostics.HealthChecks": {
               "target": "Package",
               "version": "[7.0.9, )"
             },
+            "Microsoft.Extensions.Hosting": {
+              "target": "Package",
+              "version": "[7.0.1, )"
+            },
+            "Microsoft.Extensions.Hosting.Abstractions": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.Extensions.Options": {
+              "target": "Package",
+              "version": "[7.0.1, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.5.0, )"
+            },
+            "Swashbuckle.AspNetCore.Annotations": {
+              "target": "Package",
+              "version": "[6.5.0, )"
+            },
             "Swashbuckle.AspNetCore.Filters": {
               "target": "Package",
-              "version": "[8.0.2, )"
+              "version": "[7.0.12, )"
+            },
+            "Swashbuckle.AspNetCore.Swagger": {
+              "target": "Package",
+              "version": "[6.5.0, )"
             },
             "Swashbuckle.AspNetCore.SwaggerGen": {
               "target": "Package",
-              "version": "[6.9.0, )"
+              "version": "[6.5.0, )"
             },
             "Swashbuckle.AspNetCore.SwaggerUI": {
               "target": "Package",
-              "version": "[8.1.1, )"
+              "version": "[6.5.0, )"
             }
           },
           "imports": [
@@ -128,14 +160,14 @@
         }
       }
     },
-    "C:\\repos\\CleaningMyName\\src\\CleaningMyName.Application\\CleaningMyName.Application.csproj": {
+    "F:\\repos\\CleaningMyName\\src\\CleaningMyName.Application\\CleaningMyName.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\repos\\CleaningMyName\\src\\CleaningMyName.Application\\CleaningMyName.Application.csproj",
+        "projectUniqueName": "F:\\repos\\CleaningMyName\\src\\CleaningMyName.Application\\CleaningMyName.Application.csproj",
         "projectName": "CleaningMyName.Application",
-        "projectPath": "C:\\repos\\CleaningMyName\\src\\CleaningMyName.Application\\CleaningMyName.Application.csproj",
+        "projectPath": "F:\\repos\\CleaningMyName\\src\\CleaningMyName.Application\\CleaningMyName.Application.csproj",
         "packagesPath": "C:\\Users\\muril\\.nuget\\packages\\",
-        "outputPath": "C:\\repos\\CleaningMyName\\src\\CleaningMyName.Application\\obj\\",
+        "outputPath": "F:\\repos\\CleaningMyName\\src\\CleaningMyName.Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -156,8 +188,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\repos\\CleaningMyName\\src\\CleaningMyName.Domain\\CleaningMyName.Domain.csproj": {
-                "projectPath": "C:\\repos\\CleaningMyName\\src\\CleaningMyName.Domain\\CleaningMyName.Domain.csproj"
+              "F:\\repos\\CleaningMyName\\src\\CleaningMyName.Domain\\CleaningMyName.Domain.csproj": {
+                "projectPath": "F:\\repos\\CleaningMyName\\src\\CleaningMyName.Domain\\CleaningMyName.Domain.csproj"
               }
             }
           }
@@ -231,14 +263,14 @@
         }
       }
     },
-    "C:\\repos\\CleaningMyName\\src\\CleaningMyName.Domain\\CleaningMyName.Domain.csproj": {
+    "F:\\repos\\CleaningMyName\\src\\CleaningMyName.Domain\\CleaningMyName.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\repos\\CleaningMyName\\src\\CleaningMyName.Domain\\CleaningMyName.Domain.csproj",
+        "projectUniqueName": "F:\\repos\\CleaningMyName\\src\\CleaningMyName.Domain\\CleaningMyName.Domain.csproj",
         "projectName": "CleaningMyName.Domain",
-        "projectPath": "C:\\repos\\CleaningMyName\\src\\CleaningMyName.Domain\\CleaningMyName.Domain.csproj",
+        "projectPath": "F:\\repos\\CleaningMyName\\src\\CleaningMyName.Domain\\CleaningMyName.Domain.csproj",
         "packagesPath": "C:\\Users\\muril\\.nuget\\packages\\",
-        "outputPath": "C:\\repos\\CleaningMyName\\src\\CleaningMyName.Domain\\obj\\",
+        "outputPath": "F:\\repos\\CleaningMyName\\src\\CleaningMyName.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -296,14 +328,14 @@
         }
       }
     },
-    "C:\\repos\\CleaningMyName\\src\\CleaningMyName.Infrastructure\\CleaningMyName.Infrastructure.csproj": {
+    "F:\\repos\\CleaningMyName\\src\\CleaningMyName.Infrastructure\\CleaningMyName.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\repos\\CleaningMyName\\src\\CleaningMyName.Infrastructure\\CleaningMyName.Infrastructure.csproj",
+        "projectUniqueName": "F:\\repos\\CleaningMyName\\src\\CleaningMyName.Infrastructure\\CleaningMyName.Infrastructure.csproj",
         "projectName": "CleaningMyName.Infrastructure",
-        "projectPath": "C:\\repos\\CleaningMyName\\src\\CleaningMyName.Infrastructure\\CleaningMyName.Infrastructure.csproj",
+        "projectPath": "F:\\repos\\CleaningMyName\\src\\CleaningMyName.Infrastructure\\CleaningMyName.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\muril\\.nuget\\packages\\",
-        "outputPath": "C:\\repos\\CleaningMyName\\src\\CleaningMyName.Infrastructure\\obj\\",
+        "outputPath": "F:\\repos\\CleaningMyName\\src\\CleaningMyName.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -324,11 +356,11 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\repos\\CleaningMyName\\src\\CleaningMyName.Application\\CleaningMyName.Application.csproj": {
-                "projectPath": "C:\\repos\\CleaningMyName\\src\\CleaningMyName.Application\\CleaningMyName.Application.csproj"
+              "F:\\repos\\CleaningMyName\\src\\CleaningMyName.Application\\CleaningMyName.Application.csproj": {
+                "projectPath": "F:\\repos\\CleaningMyName\\src\\CleaningMyName.Application\\CleaningMyName.Application.csproj"
               },
-              "C:\\repos\\CleaningMyName\\src\\CleaningMyName.Domain\\CleaningMyName.Domain.csproj": {
-                "projectPath": "C:\\repos\\CleaningMyName\\src\\CleaningMyName.Domain\\CleaningMyName.Domain.csproj"
+              "F:\\repos\\CleaningMyName\\src\\CleaningMyName.Domain\\CleaningMyName.Domain.csproj": {
+                "projectPath": "F:\\repos\\CleaningMyName\\src\\CleaningMyName.Domain\\CleaningMyName.Domain.csproj"
               }
             }
           }
@@ -395,6 +427,10 @@
               "target": "Package",
               "version": "[7.0.0, )"
             },
+            "Microsoft.Extensions.Caching.StackExchangeRedis": {
+              "target": "Package",
+              "version": "[7.0.5, )"
+            },
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
               "version": "[7.0.0, )"
@@ -405,13 +441,21 @@
             },
             "Microsoft.Extensions.Configuration.Binder": {
               "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[7.0.3, )"
             },
             "Microsoft.Extensions.DependencyInjection": {
               "target": "Package",
               "version": "[7.0.0, )"
             },
             "Microsoft.Extensions.DependencyInjection.Abstractions": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.Extensions.Hosting": {
+              "target": "Package",
+              "version": "[7.0.1, )"
+            },
+            "Microsoft.Extensions.Hosting.Abstractions": {
               "target": "Package",
               "version": "[7.0.0, )"
             },
@@ -425,11 +469,15 @@
             },
             "Microsoft.Extensions.Options": {
               "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[7.0.1, )"
             },
             "Microsoft.Extensions.Options.ConfigurationExtensions": {
               "target": "Package",
               "version": "[7.0.0, )"
+            },
+            "StackExchange.Redis": {
+              "target": "Package",
+              "version": "[2.6.122, )"
             },
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",

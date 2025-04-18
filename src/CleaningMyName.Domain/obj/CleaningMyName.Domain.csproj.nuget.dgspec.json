@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\repos\\CleaningMyName\\src\\CleaningMyName.Domain\\CleaningMyName.Domain.csproj": {}
+    "F:\\repos\\CleaningMyName\\src\\CleaningMyName.Domain\\CleaningMyName.Domain.csproj": {}
   },
   "projects": {
-    "C:\\repos\\CleaningMyName\\src\\CleaningMyName.Domain\\CleaningMyName.Domain.csproj": {
+    "F:\\repos\\CleaningMyName\\src\\CleaningMyName.Domain\\CleaningMyName.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\repos\\CleaningMyName\\src\\CleaningMyName.Domain\\CleaningMyName.Domain.csproj",
+        "projectUniqueName": "F:\\repos\\CleaningMyName\\src\\CleaningMyName.Domain\\CleaningMyName.Domain.csproj",
         "projectName": "CleaningMyName.Domain",
-        "projectPath": "C:\\repos\\CleaningMyName\\src\\CleaningMyName.Domain\\CleaningMyName.Domain.csproj",
+        "projectPath": "F:\\repos\\CleaningMyName\\src\\CleaningMyName.Domain\\CleaningMyName.Domain.csproj",
         "packagesPath": "C:\\Users\\muril\\.nuget\\packages\\",
-        "outputPath": "C:\\repos\\CleaningMyName\\src\\CleaningMyName.Domain\\obj\\",
+        "outputPath": "F:\\repos\\CleaningMyName\\src\\CleaningMyName.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
