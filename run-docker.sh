@@ -13,5 +13,5 @@ docker-compose up -d cleaningmyname.api
 # For development, use the API running locally but databases in Docker:
 echo "SQL Server and Redis are now running. You can start your API locally."
 echo "Connection strings are:"
-echo "SQL Server: Server=localhost,1433;Database=CleaningMyNameDb;User Id=sa;Password=Strong_Password123!;TrustServerCertificate=True;"
+echo "SQL Server: Server=localhost,1433;Database=CleaningMyNameDb;User Id=userapi;Password=CleaningMyNameP4ssw0_rd;TrustServerCertificate=True;"
 echo "Redis: localhost:6379"
