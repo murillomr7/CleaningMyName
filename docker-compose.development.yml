@@ -1,0 +1,65 @@
+version: '3.8'
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: cleaningmyname-sqlserver
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Strong_Password123!
+      - MSSQL_PID=Developer
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+    networks:
+      - cleaningmyname-network
+    healthcheck:
+      test: /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P "Strong_Password123!" -Q "SELECT 1" || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7.0-alpine
+    container_name: cleaningmyname-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - cleaningmyname-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  cleaningmyname.api:
+    image: ${DOCKER_REGISTRY-}cleaningmynameapi
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:80"
+      - "5001:443"
+    depends_on:
+      - sqlserver
+      - redis
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=CleaningMyNameDb;User Id=sa;Password=Strong_Password123!;TrustServerCertificate=True;
+      - ConnectionStrings__Redis=redis:6379
+    networks:
+      - cleaningmyname-network
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+
+networks:
+  cleaningmyname-network:
+    driver: bridge
+
+volumes:
+  sqlserver_data:
+  redis_data:

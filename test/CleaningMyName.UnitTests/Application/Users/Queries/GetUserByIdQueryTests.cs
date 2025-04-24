@@ -23,7 +23,6 @@ public class GetUserByIdQueryTests : TestBase
         _mockUnitOfWork = new Mock<IUnitOfWork>();
         _mockUnitOfWork.Setup(u => u.UserRepository).Returns(_mockUserRepository.Object);
 
-        // Configure AutoMapper
         var mapperConfig = new MapperConfiguration(cfg =>
         {
             cfg.AddProfile<MappingProfile>();
@@ -66,7 +65,6 @@ public class GetUserByIdQueryTests : TestBase
     [Fact]
     public async Task Handle_WithNonExistingUserId_ShouldThrowNotFoundException()
     {
-        // Arrange
         var userId = Guid.NewGuid();
         
         _mockUserRepository.Setup(r => r.GetByIdAsync(userId, default))
@@ -75,7 +73,6 @@ public class GetUserByIdQueryTests : TestBase
         var query = new GetUserByIdQuery(userId);
         var handler = new GetUserByIdQueryHandler(_mockUnitOfWork.Object, _mapper);
 
-        // Act & Assert
         await Assert.ThrowsAsync<NotFoundException>(() => 
             handler.Handle(query, default));
     }

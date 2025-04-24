@@ -77,7 +77,6 @@ public class DebtTests : TestBase
         var originalPaidOnUtc = debt.PaidOnUtc;
         var originalModifiedOnUtc = debt.ModifiedOnUtc;
 
-        // Wait to ensure timestamp would be different
         System.Threading.Thread.Sleep(10);
 
         // Act

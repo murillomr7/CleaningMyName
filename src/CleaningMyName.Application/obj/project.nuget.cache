@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ZnBaipKg33w=",
+  "dgSpecHash": "67biXG9rC/c=",
   "success": true,
-  "projectFilePath": "C:\\repos\\CleaningMyName\\src\\CleaningMyName.Application\\CleaningMyName.Application.csproj",
+  "projectFilePath": "F:\\repos\\CleaningMyName\\src\\CleaningMyName.Application\\CleaningMyName.Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\muril\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
     "C:\\Users\\muril\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",

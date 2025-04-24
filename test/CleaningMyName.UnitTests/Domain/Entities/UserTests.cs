@@ -110,7 +110,7 @@ public class UserTests : TestBase
 
         // Act
         user.AddRole(role);
-        user.AddRole(role); // Try to add the same role again
+        user.AddRole(role);
 
         // Assert
         user.UserRoles.Should().HaveCount(1);

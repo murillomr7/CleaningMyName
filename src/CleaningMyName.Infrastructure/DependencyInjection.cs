@@ -1,6 +1,8 @@
 using CleaningMyName.Application.Common.Interfaces;
 using CleaningMyName.Domain.Interfaces.Repositories;
 using CleaningMyName.Infrastructure.Authentication;
+using CleaningMyName.Infrastructure.BackgroundServices;
+using CleaningMyName.Infrastructure.Caching;
 using CleaningMyName.Infrastructure.Persistence;
 using CleaningMyName.Infrastructure.Persistence.Repositories;
 using CleaningMyName.Infrastructure.Services;
@@ -14,11 +16,31 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-        // Configure database
-        services.AddDbContext<ApplicationDbContext>(options =>
+        // Configure database with retry policy for Docker
+        services.AddDbContext<ApplicationDbContext>((provider, options) => {
             options.UseSqlServer(
                 configuration.GetConnectionString("DefaultConnection"),
-                b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
+                sqlOptions => {
+                    sqlOptions.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName);
+                    // Add resilience when in Docker environment
+                    sqlOptions.EnableRetryOnFailure(
+                        maxRetryCount: 5,
+                        maxRetryDelay: TimeSpan.FromSeconds(30),
+                        errorNumbersToAdd: null);
+                });
+        });
+
+        // Configure Redis caching with retry policy for Docker
+        services.AddStackExchangeRedisCache(options =>
+        {
+            options.Configuration = configuration.GetConnectionString("Redis") ?? "localhost:6379";
+            options.InstanceName = "CleaningMyName:";
+            options.ConfigurationOptions = new StackExchange.Redis.ConfigurationOptions
+            {
+                ConnectRetry = 5,
+                ConnectTimeout = 5000
+            };
+        });
 
         // Register repositories
         services.AddScoped<IUserRepository, UserRepository>();
@@ -30,6 +52,13 @@ public static class DependencyInjection
         services.AddScoped<IDateTimeService, DateTimeService>();
         services.AddScoped<IPasswordService, PasswordService>();
         services.AddScoped<IAuthenticationService, AuthenticationService>();
+        services.AddScoped<IDebtDataService, DebtDataService>();
+
+        // Register caching
+        services.AddSingleton<ICacheService, RedisCacheService>();
+
+        // Register background service
+        services.AddHostedService<DebtProcessingService>();
 
         // Add HttpContextAccessor
         services.AddHttpContextAccessor();

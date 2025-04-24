@@ -13,7 +13,6 @@ public class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TProg
     {
         builder.ConfigureServices(services =>
         {
-            // Remove the app's ApplicationDbContext registration
             var descriptor = services.SingleOrDefault(
                 d => d.ServiceType == typeof(DbContextOptions<ApplicationDbContext>));
 
@@ -22,27 +21,22 @@ public class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TProg
                 services.Remove(descriptor);
             }
 
-            // Add ApplicationDbContext using an in-memory database for testing
             services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseInMemoryDatabase("InMemoryDbForTesting");
             });
 
-            // Build the service provider
             var sp = services.BuildServiceProvider();
 
-            // Create a scope to obtain a reference to the database context
             using var scope = sp.CreateScope();
             var scopedServices = scope.ServiceProvider;
             var db = scopedServices.GetRequiredService<ApplicationDbContext>();
             var logger = scopedServices.GetRequiredService<ILogger<CustomWebApplicationFactory<TProgram>>>();
 
-            // Ensure the database is created
             db.Database.EnsureCreated();
 
             try
             {
-                // Seed the database with test data
                 SeedTestData(db);
             }
             catch (Exception ex)
@@ -54,8 +48,7 @@ public class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TProg
 
     private void SeedTestData(ApplicationDbContext context)
     {
-        // Add test data here
-        // Example:
+        // Todo: Add test data like
         // context.Users.Add(new User(...));
         // context.SaveChanges();
     }

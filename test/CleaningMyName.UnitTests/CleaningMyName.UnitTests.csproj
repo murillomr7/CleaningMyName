@@ -34,6 +34,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\CleaningMyName.Domain\CleaningMyName.Domain.csproj" />
     <ProjectReference Include="..\..\src\CleaningMyName.Application\CleaningMyName.Application.csproj" />
+    <ProjectReference Include="..\..\src\CleaningMyName.Infrastructure\CleaningMyName.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
