@@ -29,11 +29,9 @@ public static class DatabaseStartupHelpers
                 
         await retry.ExecuteAsync(async () =>
         {
-            // Create scope to resolve scoped DbContext
             using var scope = app.Services.CreateScope();
             var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
             
-            // Test connection
             await dbContext.Database.OpenConnectionAsync();
             await dbContext.Database.CloseConnectionAsync();
             

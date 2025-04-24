@@ -32,21 +32,18 @@ public class CreateDebtCommandHandler : IRequestHandler<CreateDebtCommand, Resul
     {
         try
         {
-            // Check if current user is an admin
             var user = _httpContextAccessor.HttpContext?.User;
             if (user == null || !user.IsInRole("Admin"))
             {
                 return Result.Failure<Guid>("Only administrators can create debts.");
             }
 
-            // Verify user exists
             var userExists = await _unitOfWork.UserRepository.ExistsAsync(request.UserId, cancellationToken);
             if (!userExists)
             {
                 return Result.Failure<Guid>($"User with ID {request.UserId} does not exist.");
             }
 
-            // Create new debt
             var debt = new Debt(
                 request.UserId,
                 request.Description,
@@ -54,7 +51,6 @@ public class CreateDebtCommandHandler : IRequestHandler<CreateDebtCommand, Resul
                 request.DueDate,
                 request.IsPaid);
 
-            // Add to repository
             await _unitOfWork.DebtRepository.AddAsync(debt, cancellationToken);
             await _unitOfWork.SaveChangesAsync(cancellationToken);
 

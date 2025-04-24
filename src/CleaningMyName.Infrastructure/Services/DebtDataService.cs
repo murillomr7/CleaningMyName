@@ -21,7 +21,6 @@ public class DebtDataService : IDebtDataService
     private readonly ApplicationDbContext _dbContext;
     private readonly ICacheService _cacheService;
     
-    // Compiled query for paged debts
     private static readonly Func<ApplicationDbContext, Guid, int, int, Task<PagedDebtResult<Debt>>> GetPagedDebtsQuery =
         EF.CompileAsyncQuery(
             (ApplicationDbContext context, Guid userId, int skip, int take) => 
@@ -60,32 +59,27 @@ public class DebtDataService : IDebtDataService
             }
         }
         
-        // If not in cache or forced refresh, try to get from the system-wide processing result
+        // If not in cache or forced refresh
         var processingResult = await GetSystemDebtProcessingResultAsync(forceRefresh, cancellationToken);
         if (processingResult != null)
         {
             var userSummary = processingResult.UserSummaries.FirstOrDefault(s => s.UserId == userId);
             if (userSummary != null)
             {
-                // Cache it individually for quicker access next time
                 await _cacheService.SetAsync(cacheKey, userSummary, TimeSpan.FromHours(3), cancellationToken);
                 return userSummary;
             }
         }
         
-        // If we still don't have it, calculate it directly
         return await CalculateUserDebtSummaryAsync(userId, cancellationToken);
     }
 
     public async Task<PagedDebtResult<DebtDto>> GetPagedUserDebtsAsync(Guid userId, int pageNumber, int pageSize, CancellationToken cancellationToken = default)
     {
-        // Calculate skip for pagination
         int skip = (pageNumber - 1) * pageSize;
         
-        // Use the compiled query for better performance
         var pagedResult = await GetPagedDebtsQuery(_dbContext, userId, skip, pageSize);
         
-        // Map the result to DTOs
         return new PagedDebtResult<DebtDto>
         {
             Items = pagedResult.Items.Select(d => new DebtDto
@@ -120,16 +114,12 @@ public class DebtDataService : IDebtDataService
             }
         }
         
-        // If we're here, either cache is empty or forced refresh.
-        // In a real app, you'd probably want to trigger the background job and wait,
-        // but for simplicity we'll just return null, assuming the background job will run eventually
         return null;
     }
 
     public async Task InvalidateUserCacheAsync(Guid userId, CancellationToken cancellationToken = default)
     {
         await _cacheService.RemoveAsync($"debt_summary_user_{userId}", cancellationToken);
-        // We'd also want to invalidate the entire system cache when a debt changes
         await _cacheService.RemoveAsync("debt_processing_result", cancellationToken);
     }
 
@@ -165,11 +155,10 @@ public class DebtDataService : IDebtDataService
             ProcessedAtUtc = DateTime.UtcNow
         };
         
-        // Cache the newly calculated summary
         await _cacheService.SetAsync(
             $"debt_summary_user_{userId}", 
             summary,
-            TimeSpan.FromHours(1), // Shorter expiration since it's a direct calculation
+            TimeSpan.FromHours(1),
             cancellationToken);
             
         return summary;

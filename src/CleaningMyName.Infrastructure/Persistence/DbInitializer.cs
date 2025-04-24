@@ -26,14 +26,12 @@ public class DbInitializer
     {
         try
         {
-            // Apply migrations if they are not applied
             if (_context.Database.GetPendingMigrations().Any())
             {
                 _logger.LogInformation("Applying migrations...");
                 await _context.Database.MigrateAsync();
             }
 
-            // Seed data
             await SeedDataAsync();
         }
         catch (Exception ex)
@@ -45,7 +43,6 @@ public class DbInitializer
 
     private async Task SeedDataAsync()
     {
-        // Seed roles if none exist
         if (!await _context.Roles.AnyAsync())
         {
             _logger.LogInformation("Seeding roles...");
@@ -57,7 +54,6 @@ public class DbInitializer
             await _context.SaveChangesAsync();
         }
 
-        // Seed admin user if none exist
         if (!await _context.Users.AnyAsync())
         {
             _logger.LogInformation("Seeding admin user...");
@@ -72,7 +68,6 @@ public class DbInitializer
                     Email.Create("admin@cleaningmyname.com"),
                     adminPassword);
                 
-                // Add admin role to user using the UserRole join entity
                 var userRoleEntity = new UserRole(adminUser.Id, adminRole.Id);
                 adminUser.AddUserRole(userRoleEntity);
                 

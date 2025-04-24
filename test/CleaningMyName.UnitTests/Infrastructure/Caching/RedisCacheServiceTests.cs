@@ -66,7 +66,6 @@ public class RedisCacheServiceTests : TestBase
         var testObject = new TestData { Id = 1, Name = "Test" };
         var expectedSerializedData = JsonSerializer.Serialize(testObject);
 
-        // Set up mock for the synchronous methods
         _mockDistributedCache.Setup(x => x.Set(
             It.IsAny<string>(),
             It.IsAny<byte[]>(),

@@ -16,10 +16,8 @@ public class UserServiceHealthCheck : IHealthCheck
     {
         try
         {
-            // Check if the user repository can get users
             var users = await _userRepository.GetAllAsync(cancellationToken);
             
-            // Verify we have at least the admin user
             if (users.Any())
             {
                 return HealthCheckResult.Healthy("User service is working correctly");

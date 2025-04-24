@@ -27,7 +27,7 @@ public static class AuthenticationExtensions
                 ValidIssuer = jwtSettings["Issuer"],
                 ValidAudience = jwtSettings["Audience"],
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey)),
-                ClockSkew = TimeSpan.Zero // Remove default 5 minute clock skew to enforce exact token lifetime
+                ClockSkew = TimeSpan.Zero
             };
 
             options.Events = new JwtBearerEvents
@@ -42,12 +42,10 @@ public static class AuthenticationExtensions
                 },
                 OnTokenValidated = context =>
                 {
-                    // Additional token validation logic can be added here
                     return Task.CompletedTask;
                 },
                 OnMessageReceived = context =>
                 {
-                    // Allow JWT tokens in query string for SignalR (if implemented)
                     var accessToken = context.Request.Query["access_token"];
                     var path = context.HttpContext.Request.Path;
                     

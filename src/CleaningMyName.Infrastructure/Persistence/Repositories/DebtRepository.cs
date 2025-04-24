@@ -12,7 +12,6 @@ public class DebtRepository : RepositoryBase<Debt>, IDebtRepository
     public DebtRepository(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         : base(dbContext)
     {
-        // Use try/catch to avoid circular dependency issues
         try
         {
             _debtDataService = serviceProvider.GetService(typeof(IDebtDataService)) as IDebtDataService;

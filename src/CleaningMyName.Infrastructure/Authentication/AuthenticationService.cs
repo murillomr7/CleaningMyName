@@ -53,10 +53,8 @@ public class AuthenticationService : IAuthenticationService
                 return new AuthenticationResult { Success = false, Message = "Invalid password." };
             }
 
-            // Generate access token
             var token = _jwtTokenGenerator.GenerateToken(user);
 
-            // Generate refresh token
             var refreshToken = _jwtTokenGenerator.GenerateRefreshToken();
             var refreshTokenEntity = new RefreshToken(
                 user.Id,
@@ -64,11 +62,9 @@ public class AuthenticationService : IAuthenticationService
                 DateTime.UtcNow.AddDays(_jwtSettings.RefreshTokenExpiryDays)
             );
 
-            // Save refresh token to database
             _dbContext.RefreshTokens.Add(refreshTokenEntity);
             await _dbContext.SaveChangesAsync();
 
-            // Record login
             user.RecordLogin();
             await _unitOfWork.SaveChangesAsync();
 
@@ -92,7 +88,6 @@ public class AuthenticationService : IAuthenticationService
     {
         try
         {
-            // Find the refresh token in the database
             var refreshTokenEntity = await _dbContext.RefreshTokens
                 .Include(rt => rt.User)
                     .ThenInclude(u => u.UserRoles)
@@ -116,10 +111,8 @@ public class AuthenticationService : IAuthenticationService
                 return new AuthenticationResult { Success = false, Message = "User account is deactivated." };
             }
 
-            // Mark the current refresh token as used
             refreshTokenEntity.MarkAsUsed();
 
-            // Generate new tokens
             var newToken = _jwtTokenGenerator.GenerateToken(user);
             var newRefreshToken = _jwtTokenGenerator.GenerateRefreshToken();
             var newRefreshTokenEntity = new RefreshToken(
@@ -128,7 +121,6 @@ public class AuthenticationService : IAuthenticationService
                 DateTime.UtcNow.AddDays(_jwtSettings.RefreshTokenExpiryDays)
             );
 
-            // Save changes
             _dbContext.RefreshTokens.Add(newRefreshTokenEntity);
             await _dbContext.SaveChangesAsync();
 

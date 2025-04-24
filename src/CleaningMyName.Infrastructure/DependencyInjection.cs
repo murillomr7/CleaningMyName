@@ -16,13 +16,11 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-        // Configure database with retry policy for Docker
         services.AddDbContext<ApplicationDbContext>((provider, options) => {
             options.UseSqlServer(
                 configuration.GetConnectionString("DefaultConnection"),
                 sqlOptions => {
                     sqlOptions.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName);
-                    // Add resilience when in Docker environment
                     sqlOptions.EnableRetryOnFailure(
                         maxRetryCount: 5,
                         maxRetryDelay: TimeSpan.FromSeconds(30),
@@ -30,7 +28,6 @@ public static class DependencyInjection
                 });
         });
 
-        // Configure Redis caching with retry policy for Docker
         services.AddStackExchangeRedisCache(options =>
         {
             options.Configuration = configuration.GetConnectionString("Redis") ?? "localhost:6379";
@@ -42,28 +39,23 @@ public static class DependencyInjection
             };
         });
 
-        // Register repositories
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IRoleRepository, RoleRepository>();
         services.AddScoped<IDebtRepository, DebtRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-        // Register services
         services.AddScoped<IDateTimeService, DateTimeService>();
         services.AddScoped<IPasswordService, PasswordService>();
         services.AddScoped<IAuthenticationService, AuthenticationService>();
         services.AddScoped<IDebtDataService, DebtDataService>();
+        services.AddScoped<IJwtService, JwtService>();
 
-        // Register caching
         services.AddSingleton<ICacheService, RedisCacheService>();
 
-        // Register background service
         services.AddHostedService<DebtProcessingService>();
 
-        // Add HttpContextAccessor
         services.AddHttpContextAccessor();
 
-        // Configure JWT
         var jwtSettings = new JwtSettings();
         configuration.GetSection("JwtSettings").Bind(jwtSettings);
         services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));

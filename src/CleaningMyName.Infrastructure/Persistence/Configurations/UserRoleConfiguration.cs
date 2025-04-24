@@ -10,7 +10,6 @@ public class UserRoleConfiguration : IEntityTypeConfiguration<UserRole>
     {
         builder.HasKey(ur => ur.Id);
 
-        // Ensure each user can have a role only once
         builder.HasIndex(ur => new { ur.UserId, ur.RoleId })
             .IsUnique();
     }

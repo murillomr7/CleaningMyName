@@ -10,7 +10,6 @@ public static class HealthCheckExtensions
     {
         var healthChecksBuilder = services.AddHealthChecks();
 
-        // Database health check
         var connectionString = configuration.GetConnectionString("DefaultConnection");
         healthChecksBuilder.AddSqlServer(
             connectionString!, 
@@ -18,34 +17,29 @@ public static class HealthCheckExtensions
             failureStatus: HealthStatus.Degraded,
             tags: new[] { "db", "sql", "sqlserver" });
 
-        // Memory health check
         healthChecksBuilder.AddProcessAllocatedMemoryHealthCheck(
             maximumMegabytesAllocated: 1024, // Maximum memory threshold (1GB)
             name: "process-memory",
             failureStatus: HealthStatus.Degraded,
             tags: new[] { "memory" });
 
-        // Disk storage health check
         healthChecksBuilder.AddDiskStorageHealthCheck(
             setup: options => options.AddDrive(Path.GetPathRoot(Directory.GetCurrentDirectory())!, 1024),
             name: "disk-space",
             failureStatus: HealthStatus.Degraded,
             tags: new[] { "storage" });
 
-        // Self health check
         healthChecksBuilder.AddCheck(
             "api", 
             () => HealthCheckResult.Healthy("API is running."),
             tags: new[] { "service" });
 
-        // Add health check UI
         services.AddHealthChecksUI(options =>
         {
             options.SetEvaluationTimeInSeconds(60); 
             options.MaximumHistoryEntriesPerEndpoint(50); 
             options.SetApiMaxActiveRequests(1);
             
-            // Add health check endpoint to be monitored
             options.AddHealthCheckEndpoint("API", "/health");
         })
         .AddInMemoryStorage();
@@ -55,7 +49,6 @@ public static class HealthCheckExtensions
 
     public static IApplicationBuilder UseCustomHealthChecks(this IApplicationBuilder app)
     {
-        // Main health check endpoint - returns detailed health status
         app.UseHealthChecks("/health", new HealthCheckOptions
         {
             Predicate = _ => true,
@@ -68,7 +61,6 @@ public static class HealthCheckExtensions
             }
         });
 
-        // Ready health check endpoint - checks if the application is ready to accept requests
         app.UseHealthChecks("/health/ready", new HealthCheckOptions
         {
             Predicate = check => check.Tags.Contains("service") || check.Tags.Contains("db"),

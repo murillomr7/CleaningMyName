@@ -5,7 +5,7 @@ namespace CleaningMyName.Infrastructure.Authentication;
 
 public class RefreshToken : BaseEntity
 {
-    private RefreshToken() { } // For EF Core
+    private RefreshToken() { } 
 
     public RefreshToken(Guid userId, string token, DateTime expiryDate)
     {

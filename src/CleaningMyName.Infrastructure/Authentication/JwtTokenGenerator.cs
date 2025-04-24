@@ -28,7 +28,6 @@ public class JwtTokenGenerator
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
         };
 
-        // Add roles to claims
         foreach (var userRole in user.UserRoles)
         {
             claims.Add(new Claim(ClaimTypes.Role, userRole.Role.Name));
@@ -66,7 +65,7 @@ public class JwtTokenGenerator
             ValidIssuer = _jwtSettings.Issuer,
             ValidateAudience = true,
             ValidAudience = _jwtSettings.Audience,
-            ValidateLifetime = false // Don't validate lifetime here
+            ValidateLifetime = false
         };
 
         var tokenHandler = new JwtSecurityTokenHandler();

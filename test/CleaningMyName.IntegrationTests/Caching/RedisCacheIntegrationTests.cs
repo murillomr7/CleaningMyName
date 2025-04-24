@@ -13,7 +13,7 @@ namespace CleaningMyName.IntegrationTests.Caching;
 public class RedisCacheIntegrationTests
 {
     private readonly ICacheService _cacheService;
-    private readonly bool _useRealRedis = false; // true to test w/ Redis
+    private readonly bool _useRealRedis = false;
 
     public RedisCacheIntegrationTests()
     {
@@ -29,7 +29,6 @@ public class RedisCacheIntegrationTests
         }
         else
         {
-            // Use in-memory cache for testing
             var memoryCache = new MemoryCache(Options.Create(new MemoryCacheOptions()));
             var memDistCache = new MemoryDistributedCache(Options.Create(new MemoryDistributedCacheOptions()));
             _cacheService = new RedisCacheService(memDistCache);
@@ -40,7 +39,7 @@ public class RedisCacheIntegrationTests
     public async Task SetAndGetAsync_ShouldWorkCorrectly()
     {
         // Arrange
-        var key = $"test_key_{Guid.NewGuid()}"; // Unique key for test isolation
+        var key = $"test_key_{Guid.NewGuid()}"; 
         var testData = new TestData
         {
             Id = 123,

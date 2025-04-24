@@ -33,7 +33,6 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Resul
     {
         try
         {
-            // Check if user with email already exists
             var emailObj = Email.Create(request.Email);
             var existingUser = await _unitOfWork.UserRepository.GetByEmailAsync(emailObj, cancellationToken);
             
@@ -42,17 +41,14 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Resul
                 return Result.Failure<Guid>($"User with email {request.Email} already exists.");
             }
 
-            // Hash the password
             var passwordHash = _passwordService.HashPassword(request.Password);
 
-            // Create new user
             var user = new User(
                 request.FirstName,
                 request.LastName,
                 emailObj,
                 passwordHash);
 
-            // Assign roles if specified
             if (request.Roles.Any())
             {
                 foreach (var roleName in request.Roles)
@@ -65,7 +61,6 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Resul
                 }
             }
 
-            // Add user to repository
             await _unitOfWork.UserRepository.AddAsync(user, cancellationToken);
             await _unitOfWork.SaveChangesAsync(cancellationToken);
 
