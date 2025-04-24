@@ -4,7 +4,7 @@ namespace CleaningMyName.Domain.Entities;
 
 public class Debt : BaseEntity
 {
-    private Debt() { } // For EF Core
+    private Debt() { } 
 
     public Debt(
         Guid userId,

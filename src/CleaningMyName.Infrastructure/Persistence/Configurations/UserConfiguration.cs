@@ -19,13 +19,11 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             .HasMaxLength(100)
             .IsRequired();
 
-        // Configure Email value object using a value converter
         builder.Property(u => u.Email)
             .HasConversion(new EmailValueConverter())
             .HasMaxLength(320)
             .IsRequired();
 
-        // Create a unique index on the Email property
         builder.HasIndex(u => u.Email)
             .IsUnique();
 
@@ -36,7 +34,6 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.Property(u => u.IsActive)
             .HasDefaultValue(true);
 
-        // Configure relationship with UserRole join entity
         builder.HasMany(u => u.UserRoles)
             .WithOne(ur => ur.User)
             .HasForeignKey(ur => ur.UserId)

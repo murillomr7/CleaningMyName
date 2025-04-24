@@ -27,17 +27,14 @@ public class GetDebtsByUserIdQueryHandler : IRequestHandler<GetDebtsByUserIdQuer
 
     public async Task<IEnumerable<DebtDto>> Handle(GetDebtsByUserIdQuery request, CancellationToken cancellationToken)
     {
-        // Check if user has access
         var user = _httpContextAccessor.HttpContext?.User;
         if (user == null)
         {
             throw new ForbiddenAccessException();
         }
 
-        // Allow access if user is admin or the request is for the current user's debts
         var isAdmin = user.IsInRole("Admin");
         
-        // Get user ID claim directly without using FindFirstValue
         var currentUserId = user.Claims
             .FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
         

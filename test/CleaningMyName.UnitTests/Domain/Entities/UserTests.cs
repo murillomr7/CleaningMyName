@@ -168,7 +168,7 @@ public class UserTests : TestBase
     {
         // Arrange
         var user = new User("John", "Doe", _validEmail, _passwordHash);
-        user.Deactivate(); // First deactivate
+        user.Deactivate();
 
         // Act
         user.Activate();

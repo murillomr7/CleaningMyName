@@ -7,7 +7,7 @@ public class User : BaseEntity
 {
     private readonly List<UserRole> _userRoles = new();
 
-    private User() { } // For EF Core
+    private User() { }
 
     public User(
         string firstName, 
@@ -63,7 +63,7 @@ public class User : BaseEntity
         }
     }
     
-    // Add a method to directly add a UserRole
+    
     public void AddUserRole(UserRole userRole)
     {
         if (!_userRoles.Any(ur => ur.RoleId == userRole.RoleId))

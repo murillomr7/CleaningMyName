@@ -25,21 +25,18 @@ public class MarkDebtAsPaidCommandHandler : IRequestHandler<MarkDebtAsPaidComman
     {
         try
         {
-            // Check if current user is an admin
             var user = _httpContextAccessor.HttpContext?.User;
             if (user == null || !user.IsInRole("Admin"))
             {
                 return Result.Failure<Unit>("Only administrators can mark debts as paid.");
             }
 
-            // Get the debt
             var debt = await _unitOfWork.DebtRepository.GetByIdAsync(request.Id, cancellationToken);
             if (debt == null)
             {
                 throw new NotFoundException("Debt", request.Id);
             }
 
-            // Update the debt status
             if (request.IsPaid)
             {
                 debt.MarkAsPaid();
@@ -49,7 +46,6 @@ public class MarkDebtAsPaidCommandHandler : IRequestHandler<MarkDebtAsPaidComman
                 debt.MarkAsUnpaid();
             }
 
-            // Update in repository
             await _unitOfWork.DebtRepository.UpdateAsync(debt, cancellationToken);
             await _unitOfWork.SaveChangesAsync(cancellationToken);
 

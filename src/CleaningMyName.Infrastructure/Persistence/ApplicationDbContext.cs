@@ -12,7 +12,6 @@ public class ApplicationDbContext : DbContext
     {
     }
 
-    // Make properties virtual for mocking
     public virtual DbSet<User> Users { get; set; } = null!;
     public virtual DbSet<Role> Roles { get; set; } = null!;
     public virtual DbSet<UserRole> UserRoles { get; set; } = null!;
@@ -23,7 +22,6 @@ public class ApplicationDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
         
-        // Apply all configurations from the current assembly
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
     }
 

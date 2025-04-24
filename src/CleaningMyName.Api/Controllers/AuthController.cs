@@ -20,7 +20,6 @@ namespace CleaningMyName.Api.Controllers
         [AllowAnonymous]
         public IActionResult Login([FromBody] LoginRequest request)
         {
-            // For testing purposes only - in production, validate credentials
             if (request.Username == "test" && request.Password == "test")
             {
                 var token = _jwtService.GenerateToken(

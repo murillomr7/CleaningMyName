@@ -16,7 +16,6 @@ public class DebtProcessingService : BackgroundService
     private readonly ILogger<DebtProcessingService> _logger;
     private readonly TimeSpan _processingInterval = TimeSpan.FromMinutes(30);
     
-    // Compiled query for better performance on frequent executions
     private static readonly Func<ApplicationDbContext, DateTime, IAsyncEnumerable<Debt>> GetOverdueDebtsQuery = 
         EF.CompileAsyncQuery(
             (ApplicationDbContext context, DateTime currentDate) => 
@@ -61,17 +60,14 @@ public class DebtProcessingService : BackgroundService
         var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
         var cacheService = scope.ServiceProvider.GetRequiredService<ICacheService>();
         
-        // Process debt data
         var result = await CalculateDebtSummaries(dbContext, stoppingToken);
         
-        // Cache the results
         await cacheService.SetAsync(
             "debt_processing_result", 
             result,
             TimeSpan.FromHours(6), 
             stoppingToken);
         
-        // Cache individual user summaries for quicker access
         foreach (var userSummary in result.UserSummaries)
         {
             await cacheService.SetAsync(
@@ -93,7 +89,6 @@ public class DebtProcessingService : BackgroundService
             ProcessedAtUtc = DateTime.UtcNow
         };
 
-        // Project users and include only needed properties
         var users = await dbContext.Users
             .Select(u => new
             {
@@ -104,7 +99,6 @@ public class DebtProcessingService : BackgroundService
 
         result.UserSummaries = new List<DebtSummaryDto>(users.Count);
         
-        // Group debts by user and calculate summaries
         var allDebts = await dbContext.Debts
             .Include(d => d.User)
             .AsNoTracking()
@@ -113,7 +107,6 @@ public class DebtProcessingService : BackgroundService
         result.TotalSystemDebts = allDebts.Count;
         result.TotalSystemDebt = allDebts.Sum(d => d.Amount);
         
-        // Get overdue debts using compiled query for better performance
         var overdueDebts = new List<Debt>();
         await foreach (var debt in GetOverdueDebtsQuery(dbContext, currentDate).WithCancellation(stoppingToken))
         {

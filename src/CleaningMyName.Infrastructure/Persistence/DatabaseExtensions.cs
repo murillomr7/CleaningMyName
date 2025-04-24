@@ -14,7 +14,6 @@ public static class DatabaseExtensions
         
         try
         {
-            // Get the logger factory and create the appropriate logger
             var loggerFactory = serviceProvider.GetRequiredService<ILoggerFactory>();
             var logger = loggerFactory.CreateLogger<DbInitializer>();
             
@@ -30,7 +29,6 @@ public static class DatabaseExtensions
         }
         catch (Exception ex)
         {
-            // Create a logger for this method to log the error
             var methodLogger = serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger("DatabaseMigration");
             methodLogger.LogError(ex, "An error occurred while migrating the database.");
             throw;

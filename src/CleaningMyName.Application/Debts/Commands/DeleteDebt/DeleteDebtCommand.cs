@@ -25,21 +25,18 @@ public class DeleteDebtCommandHandler : IRequestHandler<DeleteDebtCommand, Resul
     {
         try
         {
-            // Check if current user is an admin
             var user = _httpContextAccessor.HttpContext?.User;
             if (user == null || !user.IsInRole("Admin"))
             {
                 return Result.Failure<Unit>("Only administrators can delete debts.");
             }
 
-            // Get the debt
             var debt = await _unitOfWork.DebtRepository.GetByIdAsync(request.Id, cancellationToken);
             if (debt == null)
             {
                 throw new NotFoundException("Debt", request.Id);
             }
 
-            // Delete from repository
             await _unitOfWork.DebtRepository.DeleteAsync(debt, cancellationToken);
             await _unitOfWork.SaveChangesAsync(cancellationToken);
 

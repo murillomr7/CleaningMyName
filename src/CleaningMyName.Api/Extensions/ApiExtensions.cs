@@ -10,7 +10,6 @@ public static class ApiExtensions
 {
     public static IServiceCollection AddApiServices(this IServiceCollection services)
     {
-        // Add API versioning
         services.AddApiVersioning(options =>
         {
             options.DefaultApiVersion = new ApiVersion(1, 0);
@@ -21,14 +20,12 @@ public static class ApiExtensions
                 new HeaderApiVersionReader("X-Api-Version"));
         });
 
-        // Configure swagger versioning
         services.AddVersionedApiExplorer(options =>
         {
             options.GroupNameFormat = "'v'VVV";
             options.SubstituteApiVersionInUrl = true;
         });
 
-        // Configure Swagger
         services.AddSwaggerGen(options =>
         {
             options.SwaggerDoc("v1", new OpenApiInfo
@@ -44,7 +41,6 @@ public static class ApiExtensions
                 }
             });
 
-            // Add JWT authentication to Swagger
             options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
             {
                 Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
@@ -69,7 +65,6 @@ public static class ApiExtensions
                 }
             });
 
-            // Use XML comments for API documentation
             var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
             var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
             if (File.Exists(xmlPath))
@@ -91,8 +86,6 @@ public static class ApiExtensions
         {
             if (context.Request.Path.StartsWithSegments("/swagger"))
             {
-                // Create a separate middleware for Swagger UI
-                // Direct implementation to avoid extension method dependency
                 context.Response.StatusCode = 200;
                 context.Response.ContentType = "text/html";
                 await context.Response.WriteAsync(@"

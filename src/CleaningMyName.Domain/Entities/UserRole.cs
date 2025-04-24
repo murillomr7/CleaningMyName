@@ -4,7 +4,7 @@ namespace CleaningMyName.Domain.Entities;
 
 public class UserRole : BaseEntity
 {
-    private UserRole() { } // For EF Core
+    private UserRole() { }
 
     public UserRole(Guid userId, Guid roleId)
     {

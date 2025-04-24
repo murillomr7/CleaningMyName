@@ -73,7 +73,7 @@ public class DebtTests : TestBase
     {
         // Arrange
         var debt = new Debt(Guid.NewGuid(), "Test Debt", 100m, DateTime.Today.AddDays(30), true);
-        debt.MarkAsPaid(); // This will set the PaidOnUtc
+        debt.MarkAsPaid();
         var originalPaidOnUtc = debt.PaidOnUtc;
         var originalModifiedOnUtc = debt.ModifiedOnUtc;
 
@@ -93,7 +93,7 @@ public class DebtTests : TestBase
     {
         // Arrange
         var debt = new Debt(Guid.NewGuid(), "Test Debt", 100m, DateTime.Today.AddDays(30), true);
-        debt.MarkAsPaid(); // This will set the PaidOnUtc
+        debt.MarkAsPaid();
 
         // Act
         debt.MarkAsUnpaid();
@@ -110,7 +110,7 @@ public class DebtTests : TestBase
     {
         // Arrange
         var debt = new Debt(Guid.NewGuid(), "Test Debt", 100m, DateTime.Today.AddDays(30), false);
-        debt.ModifiedOnUtc = DateTime.UtcNow.AddHours(-1); // Set a known modification date
+        debt.ModifiedOnUtc = DateTime.UtcNow.AddHours(-1); 
         var originalModifiedOnUtc = debt.ModifiedOnUtc;
 
         // Act

@@ -33,7 +33,6 @@ public class RedisCacheService : ICacheService
             
             if (cancellationToken == default)
             {
-                // Use synchronous method if no cancellation requested - helps with mocking
                 cachedData = _distributedCache.Get(key);
             }
             else
@@ -49,7 +48,6 @@ public class RedisCacheService : ICacheService
         }
         catch
         {
-            // Log errors and return null on failure - don't want caching issues to break app
             return null;
         }
     }
@@ -69,7 +67,6 @@ public class RedisCacheService : ICacheService
         {
             if (cancellationToken == default)
             {
-                // Use synchronous method if no cancellation requested - helps with mocking
                 _distributedCache.Set(key, byteData, options);
             }
             else
@@ -89,7 +86,6 @@ public class RedisCacheService : ICacheService
         {
             if (cancellationToken == default)
             {
-                // Use synchronous method if no cancellation requested - helps with mocking
                 _distributedCache.Remove(key);
             }
             else

@@ -6,7 +6,7 @@ public class Role : BaseEntity
 {
     private readonly List<UserRole> _userRoles = new();
     
-    private Role() { } // For EF Core
+    private Role() { }
     
     public Role(string name, string description = "")
     {

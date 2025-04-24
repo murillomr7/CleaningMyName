@@ -20,14 +20,12 @@ public class RoleConfiguration : IEntityTypeConfiguration<Role>
         builder.Property(r => r.Description)
             .HasMaxLength(200);
 
-        // Configure relationship with UserRole join entity
         builder.HasMany(r => r.UserRoles)
             .WithOne(ur => ur.Role)
             .HasForeignKey(ur => ur.RoleId)
             .IsRequired()
             .OnDelete(DeleteBehavior.Cascade);
 
-        // Seed default roles
         builder.HasData(
             new Role("Admin", "Administrator with full access") { Id = Guid.Parse("00000000-0000-0000-0000-000000000001"), CreatedOnUtc = DateTime.UtcNow },
             new Role("User", "Regular user with limited access") { Id = Guid.Parse("00000000-0000-0000-0000-000000000002"), CreatedOnUtc = DateTime.UtcNow }

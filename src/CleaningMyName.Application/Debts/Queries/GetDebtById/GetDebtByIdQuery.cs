@@ -34,14 +34,12 @@ public class GetDebtByIdQueryHandler : IRequestHandler<GetDebtByIdQuery, DebtDto
             throw new NotFoundException("Debt", request.Id);
         }
 
-        // Check if user has access
         var user = _httpContextAccessor.HttpContext?.User;
         if (user == null)
         {
             throw new ForbiddenAccessException();
         }
 
-        // Allow access if user is admin or the debt belongs to the current user
         var isAdmin = user.IsInRole("Admin");
         var userId = user.Claims
             .FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;

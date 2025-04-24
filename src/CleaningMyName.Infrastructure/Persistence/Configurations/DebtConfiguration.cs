@@ -27,7 +27,6 @@ public class DebtConfiguration : IEntityTypeConfiguration<Debt>
         builder.Property(d => d.PaidOnUtc)
             .IsRequired(false);
 
-        // Configure relationship with User
         builder.HasOne(d => d.User)
             .WithMany()
             .HasForeignKey(d => d.UserId)
