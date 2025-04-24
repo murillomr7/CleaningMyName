@@ -53,6 +53,7 @@ public static class DependencyInjection
         services.AddScoped<IPasswordService, PasswordService>();
         services.AddScoped<IAuthenticationService, AuthenticationService>();
         services.AddScoped<IDebtDataService, DebtDataService>();
+        services.AddScoped<IJwtService, JwtService>();
 
         // Register caching
         services.AddSingleton<ICacheService, RedisCacheService>();

@@ -30,7 +30,7 @@ public class AuthController : ApiControllerBase
     {
         var command = new LoginCommand
         {
-            Email = request.Email,
+            Email = request.Username,
             Password = request.Password
         };
 
@@ -49,7 +49,7 @@ public class AuthController : ApiControllerBase
             Token = authData.Token,
             RefreshToken = authData.RefreshToken,
             Roles = authData.Roles,
-            Expiration = DateTime.UtcNow.AddHours(1) // Based on your JWT expiration
+            Expiration = DateTime.UtcNow.AddHours(1) 
         };
 
         return Ok(ApiResponse<AuthResponse>.SuccessResponse(response, "Authentication successful"));
@@ -86,7 +86,7 @@ public class AuthController : ApiControllerBase
             Token = authData.Token,
             RefreshToken = authData.RefreshToken,
             Roles = authData.Roles,
-            Expiration = DateTime.UtcNow.AddHours(1) // Based on your JWT expiration
+            Expiration = DateTime.UtcNow.AddHours(1)
         };
 
         return Ok(ApiResponse<AuthResponse>.SuccessResponse(response, "Token refreshed successfully"));

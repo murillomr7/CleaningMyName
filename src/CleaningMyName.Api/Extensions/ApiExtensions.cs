@@ -83,13 +83,10 @@ public static class ApiExtensions
 
     public static IApplicationBuilder UseApiConfiguration(this IApplicationBuilder app)
     {
-        // Use custom exception handling middleware
         app.UseMiddleware<ExceptionHandlingMiddleware>();
 
-        // Configure Swagger - these extensions are from Swashbuckle.AspNetCore namespace
         app.UseSwagger();
 
-        // Use Swagger UI 
         app.Use(async (context, next) =>
         {
             if (context.Request.Path.StartsWithSegments("/swagger"))

@@ -5,7 +5,11 @@ using CleaningMyName.Api.Security.Requirements;
 using CleaningMyName.Application;
 using CleaningMyName.Infrastructure;
 using CleaningMyName.Infrastructure.Persistence;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,11 +17,9 @@ builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApiServices();
 builder.Services.AddHealthChecks(builder.Configuration);
-builder.Services.AddJwtAuthentication(builder.Configuration);
+
 builder.Services.AddAuthorizationPolicies();
-
 builder.Services.AddSingleton<IAuthorizationHandler, MinimumAgeHandler>();
-
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("MinimumAge18", policy =>
@@ -26,17 +28,9 @@ builder.Services.AddAuthorization(options =>
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-
-// Add Polly for resilience
 builder.Services.AddPolly();
 
 var app = builder.Build();
-
-// Wait for database to be ready before migrations
-//await app.WaitForDatabaseAsync();
-
-// Apply migrations at startup
-await app.Services.MigrateDatabaseAsync();
 
 if (app.Environment.IsDevelopment())
 {
@@ -46,7 +40,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c =>
     {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "CleaningMyName API v1");
-        c.RoutePrefix = string.Empty;
+        c.RoutePrefix = string.Empty; 
     });
 }
 else
@@ -55,15 +49,16 @@ else
 }
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
-
 app.UseHttpsRedirection();
-
 app.UseCustomHealthChecks();
 
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapSwagger().AllowAnonymous();
+
+//await app.Services.MigrateDatabaseAsync();
 
 app.Run();
 
