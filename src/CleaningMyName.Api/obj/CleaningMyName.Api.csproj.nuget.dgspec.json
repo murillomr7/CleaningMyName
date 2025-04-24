@@ -108,9 +108,17 @@
               "target": "Package",
               "version": "[7.0.0, )"
             },
+            "Microsoft.Extensions.Http.Polly": {
+              "target": "Package",
+              "version": "[7.0.5, )"
+            },
             "Microsoft.Extensions.Options": {
               "target": "Package",
               "version": "[7.0.1, )"
+            },
+            "Polly": {
+              "target": "Package",
+              "version": "[7.2.4, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

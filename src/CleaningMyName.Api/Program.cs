@@ -1,6 +1,7 @@
 using CleaningMyName.Api.Extensions;
 using CleaningMyName.Api.Middleware;
 using CleaningMyName.Api.Security.Handlers;
+using CleaningMyName.Api.Security.Requirements;
 using CleaningMyName.Application;
 using CleaningMyName.Infrastructure;
 using CleaningMyName.Infrastructure.Persistence;
@@ -17,12 +18,24 @@ builder.Services.AddAuthorizationPolicies();
 
 builder.Services.AddSingleton<IAuthorizationHandler, MinimumAgeHandler>();
 
-builder.Services.AddAuthorization();
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("MinimumAge18", policy =>
+        policy.Requirements.Add(new MinimumAgeRequirement(18)));
+});
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
+// Add Polly for resilience
+builder.Services.AddPolly();
+
 var app = builder.Build();
 
+// Wait for database to be ready before migrations
+//await app.WaitForDatabaseAsync();
+
+// Apply migrations at startup
 await app.Services.MigrateDatabaseAsync();
 
 if (app.Environment.IsDevelopment())

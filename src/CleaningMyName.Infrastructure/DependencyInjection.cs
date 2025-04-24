@@ -16,17 +16,30 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-        // Configure database
-        services.AddDbContext<ApplicationDbContext>(options =>
+        // Configure database with retry policy for Docker
+        services.AddDbContext<ApplicationDbContext>((provider, options) => {
             options.UseSqlServer(
                 configuration.GetConnectionString("DefaultConnection"),
-                b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
+                sqlOptions => {
+                    sqlOptions.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName);
+                    // Add resilience when in Docker environment
+                    sqlOptions.EnableRetryOnFailure(
+                        maxRetryCount: 5,
+                        maxRetryDelay: TimeSpan.FromSeconds(30),
+                        errorNumbersToAdd: null);
+                });
+        });
 
-        // Configure Redis caching
+        // Configure Redis caching with retry policy for Docker
         services.AddStackExchangeRedisCache(options =>
         {
             options.Configuration = configuration.GetConnectionString("Redis") ?? "localhost:6379";
             options.InstanceName = "CleaningMyName:";
+            options.ConfigurationOptions = new StackExchange.Redis.ConfigurationOptions
+            {
+                ConnectRetry = 5,
+                ConnectTimeout = 5000
+            };
         });
 
         // Register repositories

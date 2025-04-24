@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ohEeSx+9TJA=",
+  "dgSpecHash": "Ufon+BJ1aFw=",
   "success": true,
   "projectFilePath": "F:\\repos\\CleaningMyName\\test\\CleaningMyName.IntegrationTests\\CleaningMyName.IntegrationTests.csproj",
   "expectedPackageFiles": [
@@ -82,6 +82,7 @@
     "C:\\Users\\muril\\.nuget\\packages\\microsoft.extensions.hosting\\7.0.1\\microsoft.extensions.hosting.7.0.1.nupkg.sha512",
     "C:\\Users\\muril\\.nuget\\packages\\microsoft.extensions.hosting.abstractions\\7.0.0\\microsoft.extensions.hosting.abstractions.7.0.0.nupkg.sha512",
     "C:\\Users\\muril\\.nuget\\packages\\microsoft.extensions.http\\7.0.0\\microsoft.extensions.http.7.0.0.nupkg.sha512",
+    "C:\\Users\\muril\\.nuget\\packages\\microsoft.extensions.http.polly\\7.0.5\\microsoft.extensions.http.polly.7.0.5.nupkg.sha512",
     "C:\\Users\\muril\\.nuget\\packages\\microsoft.extensions.logging\\7.0.0\\microsoft.extensions.logging.7.0.0.nupkg.sha512",
     "C:\\Users\\muril\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\7.0.1\\microsoft.extensions.logging.abstractions.7.0.1.nupkg.sha512",
     "C:\\Users\\muril\\.nuget\\packages\\microsoft.extensions.logging.configuration\\7.0.0\\microsoft.extensions.logging.configuration.7.0.0.nupkg.sha512",
@@ -118,6 +119,8 @@
     "C:\\Users\\muril\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\muril\\.nuget\\packages\\nuget.frameworks\\5.11.0\\nuget.frameworks.5.11.0.nupkg.sha512",
     "C:\\Users\\muril\\.nuget\\packages\\pipelines.sockets.unofficial\\2.2.8\\pipelines.sockets.unofficial.2.2.8.nupkg.sha512",
+    "C:\\Users\\muril\\.nuget\\packages\\polly\\7.2.4\\polly.7.2.4.nupkg.sha512",
+    "C:\\Users\\muril\\.nuget\\packages\\polly.extensions.http\\3.0.0\\polly.extensions.http.3.0.0.nupkg.sha512",
     "C:\\Users\\muril\\.nuget\\packages\\prometheus-net\\8.0.1\\prometheus-net.8.0.1.nupkg.sha512",
     "C:\\Users\\muril\\.nuget\\packages\\respawn\\6.0.0\\respawn.6.0.0.nupkg.sha512",
     "C:\\Users\\muril\\.nuget\\packages\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
